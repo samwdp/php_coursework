@@ -1,0 +1,242 @@
+/*Resets*/
+
+ul {padding:0px;
+    margin:0 0 20px 0;
+    list-style:none;
+}
+
+h1, h2 { padding:0px;
+         margin: 0 0 20px 0;
+         font-weight:normal;
+}
+
+p { padding:0; 
+    margin: 0 0 20px 0;
+}
+
+a:link, a:visited {text-decoration:underline;
+                   color:#000;}
+
+a:hover {text-decoration:none;}
+
+ul li {padding:5px 0;}
+
+ul li input [type="text"], ul li input [type="password"] {
+    width:200px;
+}
+
+/*Headers */
+
+h1 {font-size:1.8em;
+}
+
+h2 {font-size:1.4em;
+}
+
+.logo { font:2em Arial;
+        margin:0 0 10px 0; 
+        padding:0;
+        width:200px;
+        color:#efff;
+}
+
+/*Containers */
+#products-wrapper {
+    width: 500px;
+    margin-right: auto;
+    font: 12px Arial, Helvetica, sans-serif;
+}
+
+body {background:lightslategray;
+      font-family:Arial; 
+      font-size:0.8em;}
+
+
+#container, footer { background :#efff;
+                     width:920px;
+                     margin:0 auto; 
+                     padding:20px;}
+
+
+header { width:940px;
+         padding:10px;
+         margin: 0 0 10px auto; 
+}
+
+#container {min-height:500px;
+            border-radius:5px 5px 0 0;}
+
+
+footer {border-radius:5px 5px 0 0;}
+
+.widget {margin-bottom:20px;
+}
+
+
+.widget h2 {margin: 0 0 10px auto; 
+            padding:0 px; 
+            font-weight:normal;
+            border-bottom:1px solid #ddd;}
+
+
+.widget .inner {margin:0 10px;
+
+}
+
+
+/*Navigation */
+
+nav {float:left;
+}
+
+nav ul {margin:0;
+}
+
+
+nav ul li {display :inline;
+           margin-right:10px;
+}
+
+nav ul li a {text-decoration:none;
+}
+
+nav ul li.current{font-weight:bold;
+}
+
+
+nav ul li.last{border-right:0;}
+
+
+/*Aside */
+
+aside {width:260px;
+       float:right;
+       border-left:1px dashed #aaa;
+       padding-left:15px;}
+
+/*login*/
+
+#login li.link{margin-top:5px;
+}
+
+
+/*footer*/
+
+footer {border-top:1px dashed #ddd;
+        color:#999;
+}
+
+/*Misc*/
+
+.clear {clear:both;
+
+}
+
+/*Page layout*/
+
+
+.products {
+    width: 60%;
+    float:left;
+    margin-right: 10px;
+}
+.product {
+    margin-bottom: 10px;
+    height: 100px;
+    background: #F0F0F0;
+    padding: 10px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #F8F8F8;
+
+}
+.product .product-thumb {
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin-right: 10px;
+}
+.product .product-content{
+    overflow:hidden;
+}
+.product .product-content h3 {
+    font-size: 18px;
+    margin: 0px;
+    padding: 0px;
+    color: #707070;
+}
+.product .product-info {
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top:10px;
+}
+
+.shopping-cart{
+    width: 40%;
+    background: #F0F0F0;
+    padding: 10px;	
+    border: 1px solid #DDD;
+    border-radius: 5px;
+
+}
+.shopping-cart h2 {
+    background: #E2E2E2;
+    padding: 4px;
+    font-size: 14px;
+    margin: -10px -10px 5px;
+    color: #707070;
+}
+
+.shopping-cart h3,.view-cart h3 {
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+}
+.shopping-cart ol{
+    padding: 1px 0px 0px 15px;
+}
+.shopping-cart .cart-itm, .view-cart .cart-itm{
+    border-bottom: 1px solid #DDD;
+    font-size: 11px;
+    font-family: arial;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+.shopping-cart .remove-itm, .view-cart .remove-itm{
+    font-size: 14px;
+    float: right;
+    background: #D5D5D5;
+    padding: 4px;
+    line-height: 8px;
+    border-radius: 3px;
+}
+.shopping-cart .remove-itm:hover, .view-cart .remove-itm:hover{
+    background: #C4C4C4;
+}
+.shopping-cart .remove-itm a, .view-cart .remove-itm a{
+    color: #888;
+    text-shadow: 1px 1px 1px #ECECEC;
+    text-decoration:none;
+}
+
+.check-out-txt{
+    float:right;
+}
+
+/*** view cart **/
+.view-cart{
+    width: 100%;
+    float:left;
+    background: #F0F0F0;
+    padding: 10px;	
+    border: 1px solid #DDD;
+    border-radius: 5px;
+}
+.view-cart .p-price{
+    float: right;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.view-cart .product-info{width:60%;}
