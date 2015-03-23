@@ -46,4 +46,4 @@ include 'includes/overall/header.php';
     </div>
 </div>
 
-<?php include 'includes/overall/footer.php'; ?>
+<?php include 'includes/overall/footer.php';

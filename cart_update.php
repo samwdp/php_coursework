@@ -1,5 +1,4 @@
 <?php
-
 require 'core/init.php';
 
 //empty cart by distroying current session
@@ -75,4 +74,3 @@ if (isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pr
     //redirect back to original page
     header('Location:' . $return_url);
 }
-?>
