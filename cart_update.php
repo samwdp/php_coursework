@@ -1,4 +1,5 @@
 <?php
+
 require 'core/init.php';
 
 //empty cart by distroying current session
@@ -9,6 +10,7 @@ if (isset($_GET["emptycart"]) && $_GET["emptycart"] == 1) {
 }
 
 //add item in shopping cart
+
 if (isset($_POST["type"]) && $_POST["type"] == 'add') {
     $product_code = filter_var($_POST["product_code"], FILTER_SANITIZE_STRING); //product code
     $product_qty = filter_var($_POST["product_qty"], FILTER_SANITIZE_NUMBER_INT); //product code

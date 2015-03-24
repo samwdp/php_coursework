@@ -1,6 +1,6 @@
 <?php
 require 'core/init.php';
-include 'includes/overall/header.php';
+include 'includes/overall/student_header.php';
 ?>
 <div id="products-wrapper">
     <div class="view-cart">
@@ -46,4 +46,20 @@ include 'includes/overall/header.php';
     </div>
 </div>
 
-<?php include 'includes/overall/footer.php';
+<div id="account">
+    <div class="account-details">
+
+        <?php
+        $result = $mysqli->query("SELECT account_balance FROM users");
+        if ($result) {
+            while ($obj = $result->fetch_object()) {
+                echo 'account balance: ' . $obj->account_balance;
+            }
+        }
+        ?>
+    </div>
+
+</div>
+
+<?php
+include 'includes/overall/footer.php';
