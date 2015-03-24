@@ -4,4 +4,4 @@
     <body>
         <?php include 'includes/student_header.php'; ?>	
         <div id="container">
-            <?php include 'includes/aside.php';
+            <?php include 'includes/student_aside.php';
