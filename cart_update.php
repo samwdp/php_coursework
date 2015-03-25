@@ -15,18 +15,28 @@ if (isset($_POST["type"]) && $_POST["type"] == 'add') {
     $product_code = filter_var($_POST["product_code"], FILTER_SANITIZE_STRING); //product code
     $product_qty = filter_var($_POST["product_qty"], FILTER_SANITIZE_NUMBER_INT); //product code
     $return_url = base64_decode($_POST["return_url"]); //return url
-    //limit quantity for single product
+//limit quantity for single product
     if ($product_qty > 10) {
         die('<div align="center">This demo does not allowed more than 10 quantity!<br /><a href="http://sanwebe.com/assets/paypal-shopping-cart-integration/">Back To Products</a>.</div>');
     }
 
-    //MySqli query - get details of item from db using product code
-    $results = $mysqli->query("SELECT product_name,price FROM products WHERE product_code='$product_code' LIMIT 1");
+//MySqli query - get details of item from db using product code
+    $results = $mysqli->query("SELECT product_name,price,items_in_stock FROM products WHERE product_code='$product_code' LIMIT 1");
     $obj = $results->fetch_object();
+    $stock = $obj->items_in_stock;
+
+    //creates a temp table
+    $sql = array(
+        'DROP TABLE IF EXISTS product_temp;',
+        'CREATE TABLE product_temp SELECT * FROM products'
+    );
 
     if ($results) { //we have the product info 
-        //prepare array for the session variable
+//prepare array for the session variable
         $new_product = array(array('name' => $obj->product_name, 'code' => $product_code, 'qty' => $product_qty, 'price' => $obj->price));
+
+
+
 
         if (isset($_SESSION["products"])) { //if we have the session
             $found = false; //set found item to false
@@ -36,43 +46,73 @@ if (isset($_POST["type"]) && $_POST["type"] == 'add') {
                     $product[] = array('name' => $cart_itm["name"], 'code' => $cart_itm["code"], 'qty' => $product_qty, 'price' => $cart_itm["price"]);
                     $found = true;
                 } else {
-                    //item doesn't exist in the list, just retrive old info and prepare array for session var
+//item doesn't exist in the list, just retrive old info and prepare array for session var
                     $product[] = array('name' => $cart_itm["name"], 'code' => $cart_itm["code"], 'qty' => $cart_itm["qty"], 'price' => $cart_itm["price"]);
                 }
             }
 
             if ($found == false) { //we didn't find item in array
-                //add new user item in array
+//add new user item in array
                 $_SESSION["products"] = array_merge($product, $new_product);
             } else {
-                //found user item in array list, and increased the quantity
+//found user item in array list, and increased the quantity
                 $_SESSION["products"] = $product;
+                if ($stock === 0) {
+                    echo 'no more in stock';
+                } else {
+                    $stock = ($stock - $product_qty);
+                    $mysqli->query("UPDATE products SET items_in_stock = '$stock' WHERE product_code='$product_code'");
+                }
+                $mysqli->query("INSERT INTO product_temp SELECT * FROM products WHERE product_code='$product_code' AND items_in_stock = '$stock'");
+                if (sizeof($sql) > 0) {
+                    foreach ($sql as $query) {
+                        if (!$mysqli->query($query)) {
+                            die('A MySQL error has occurred!;' . $con->error);
+                        }
+                    }
+                }
             }
         } else {
-            //create a new session var if does not exist
+//create a new session var if does not exist
             $_SESSION["products"] = $new_product;
+            $decreasestock = ($stock - $product_qty);
+            $mysqli->query("UPDATE products SET items_in_stock = '$decreasestock' WHERE product_code='$product_code'");
+// Run the MySQL queries
+            if (sizeof($sql) > 0) {
+                foreach ($sql as $query) {
+                    if (!$mysqli->query($query)) {
+                        die('A MySQL error has occurred!;' . $con->error);
+                    }
+                }
+            }
         }
     }
 
-    //redirect back to original page
+//redirect back to original page
     header('Location:' . $return_url);
 }
 
 //remove item from shopping cart
 if (isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["products"])) {
+    $product_qty = filter_var($_POST["product_qty"], FILTER_SANITIZE_NUMBER_INT);
     $product_code = $_GET["removep"]; //get the product code to remove
     $return_url = base64_decode($_GET["return_url"]); //get return url
 
+    $results = $mysqli->query("SELECT items_in_stock FROM products WHERE product_code='$product_code' LIMIT 1");
+    $obj = $results->fetch_object();
+    $stock = $obj->items_in_stock;
 
     foreach ($_SESSION["products"] as $cart_itm) { //loop through session array var
         if ($cart_itm["code"] != $product_code) { //item does,t exist in the list
             $product[] = array('name' => $cart_itm["name"], 'code' => $cart_itm["code"], 'qty' => $cart_itm["qty"], 'price' => $cart_itm["price"]);
         }
 
-        //create a new product list for cart
+//create a new product list for cart
         $_SESSION["products"] = $product;
+        $increasestock = ($stock + $product_qty);
+        $mysqli->query("UPDATE products SET items_in_stock = '$increasestock' WHERE product_code='$product_code'");
     }
 
-    //redirect back to original page
+//redirect back to original page
     header('Location:' . $return_url);
 }

@@ -1,7 +1,3 @@
-<?php
-require 'core/init.php';
-include 'includes/overall/student_header.php';
-?>
 <div id="products-wrapper">
     <div class="view-cart">
         <?php
@@ -13,7 +9,7 @@ include 'includes/overall/student_header.php';
             $cart_items = 0;
             foreach ($_SESSION["products"] as $cart_itm) {
                 $product_code = $cart_itm["code"];
-                $results = $mysqli->query("SELECT product_name,product_desc, price FROM products WHERE product_code='$product_code' LIMIT 1");
+                $results = $mysqli->query("SELECT product_name,product_desc, price FROM product_temp WHERE product_code='$product_code' LIMIT 1");
                 $obj = $results->fetch_object();
 
                 echo '<li class="cart-itm">';
@@ -45,5 +41,4 @@ include 'includes/overall/student_header.php';
         ?>
     </div>
 </div>
-<?php
-include 'includes/overall/footer.php';
+

@@ -92,11 +92,10 @@ nav {float:left;
 nav ul {margin:0;
 }
 
-#logo{
-   float: left;
-    height: 190px;
-    width: 66px;
-    margin-right: 10px;
+nav #headerlogo a .logo{
+    float: left;
+    height: 66px;
+    width: 190px;
 }
 
 nav ul li {display :inline;
