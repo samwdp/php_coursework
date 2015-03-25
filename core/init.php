@@ -2,7 +2,7 @@
 
 require 'database/connect.php';
 require 'functions/general.php';
-require 'functions/users.php';
+//require 'functions/users.php';
 
 
 session_start();

@@ -92,6 +92,12 @@ nav {float:left;
 nav ul {margin:0;
 }
 
+#logo{
+   float: left;
+    height: 190px;
+    width: 66px;
+    margin-right: 10px;
+}
 
 nav ul li {display :inline;
            margin-right:10px;
@@ -142,7 +148,7 @@ footer {border-top:1px dashed #ddd;
 }
 .product {
     margin-bottom: 10px;
-    height: 125px;
+    height: 135px;
     background: #F0F0F0;
     padding: 10px;
     border: 1px solid #DDD;
